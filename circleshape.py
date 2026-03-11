@@ -2,8 +2,20 @@ import pygame
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
+    """
+    A base class for circular game objects.
+    Inherits from pygame.sprite.Sprite and handles basic position, velocity, and collision.
+    """
     def __init__(self, x, y, radius):
-        # we will be using this later
+        """
+        Initializes a new CircleShape.
+
+        Args:
+            x (float): Initial x-coordinate.
+            y (float): Initial y-coordinate.
+            radius (float): Radius of the circular shape.
+        """
+        # Set up sprite containers if they are defined on the class
         if hasattr(self, "containers"):
             super().__init__(self.containers)
         else:
@@ -14,14 +26,30 @@ class CircleShape(pygame.sprite.Sprite):
         self.radius = radius
 
     def draw(self, screen):
-        # must override
+        """
+        Draws the shape to the screen. To be overridden by subclasses.
+        """
         pass
 
     def update(self, dt):
-        # must override
+        """
+        Updates the shape's state. To be overridden by subclasses.
+
+        Args:
+            dt (float): Time delta since the last frame.
+        """
         pass
     
     def collides_with(self, other):
+        """
+        Checks for collision with another CircleShape object.
+
+        Args:
+            other (CircleShape): The other object to check collision against.
+
+        Returns:
+            bool: True if the shapes collide, False otherwise.
+        """
         if self.position.distance_to(other.position) <= self.radius + other.radius:
             return True
         return False
